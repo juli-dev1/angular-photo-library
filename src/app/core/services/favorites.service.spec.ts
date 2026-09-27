@@ -20,4 +20,13 @@ describe('FavoritesService', () => {
 
     expect(serviceAfterRefresh.favorites()).toEqual([photo]);
   });
+
+  it('removes a photo from favorites and persists the change', () => {
+    const service = new FavoritesService();
+    service.addFavorite(photo);
+
+    expect(service.removeFavorite(photo.id)).toBeTrue();
+    expect(service.favorites()).toEqual([]);
+    expect(new FavoritesService().favorites()).toEqual([]);
+  });
 });

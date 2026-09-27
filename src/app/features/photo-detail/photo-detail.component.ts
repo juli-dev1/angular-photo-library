@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject, signal 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 import { filter, finalize, map, switchMap } from 'rxjs';
+import { FavoritesService } from '../../core/services/favorites.service';
 import { Photo } from '../../core/models/photo.model';
 import { PhotoService } from '../../core/services/photo.service';
 
@@ -15,10 +16,19 @@ import { PhotoService } from '../../core/services/photo.service';
 export class PhotoDetailComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly photoService = inject(PhotoService);
+  private readonly favoritesService = inject(FavoritesService);
   private readonly destroyRef = inject(DestroyRef);
 
   isLoading = signal(false);
   readonly photo = signal<Photo | null>(null);
+
+  isFavorite(photoId: number): boolean {
+    return this.favoritesService.isFavorite(photoId);
+  }
+
+  removeFromFavorites(photoId: number): void {
+    this.favoritesService.removeFavorite(photoId);
+  }
 
   ngOnInit(): void {
     this.route.paramMap

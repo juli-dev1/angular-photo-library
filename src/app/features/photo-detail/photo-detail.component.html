@@ -3,6 +3,12 @@
     <p class="loading-state" role="status">Loading photo...</p>
   } @else if (photo(); as photo) {
     <img [src]="photo.url" [alt]="photo.alt">
+    @if (isFavorite(photo.id)) {
+      <button mat-stroked-button class="remove-from-favorites" type="button"
+        (click)="removeFromFavorites(photo.id)">
+        Remove from favorites
+      </button>
+    }
   } @else {
     <p class="not-found" role="status">Photo not found.</p>
   }
