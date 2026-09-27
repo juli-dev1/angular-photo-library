@@ -18,8 +18,8 @@ export class GalleryComponent implements OnInit {
   private readonly pageSize = 12;
   private page = 0;
 
+  isLoading = signal(false);
   readonly photos = signal<Photo[]>([]);
-  readonly isLoading = signal(false);
 
   ngOnInit(): void {
     this.loadNextPage();

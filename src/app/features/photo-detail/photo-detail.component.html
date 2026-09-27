@@ -1,0 +1,9 @@
+<section class="photo-detail" aria-label="Photo detail">
+  @if (isLoading()) {
+    <p class="loading-state" role="status">Loading photo...</p>
+  } @else if (photo(); as photo) {
+    <img [src]="photo.url" [alt]="photo.alt">
+  } @else {
+    <p class="not-found" role="status">Photo not found.</p>
+  }
+</section>
