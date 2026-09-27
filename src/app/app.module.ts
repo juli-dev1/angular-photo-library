@@ -8,6 +8,7 @@ import { AppFooterComponent } from './shared/layout/footer/footer.component';
 import { CollectionNavComponent } from './shared/layout/collection-nav/collection-nav.component';
 import { GalleryComponent } from './features/gallery/gallery.component';
 import { FavoritesComponent } from './features/favorites/favorites.component';
+import { PhotoDetailComponent } from './features/photo-detail/photo-detail.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -18,7 +19,8 @@ import { MatIconModule } from '@angular/material/icon';
     AppFooterComponent,
     CollectionNavComponent,
     GalleryComponent,
-    FavoritesComponent
+    FavoritesComponent,
+    PhotoDetailComponent,
   ],
   imports: [
     BrowserModule,

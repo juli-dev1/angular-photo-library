@@ -1,11 +1,27 @@
+import { Component } from '@angular/core';
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 import { GalleryComponent } from './gallery.component';
 
+@Component({
+  template: '<p>Photo detail route</p>',
+  standalone: false
+})
+class PhotoRouteTargetComponent {}
+
 describe('GalleryComponent', () => {
+  let router: Router;
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [GalleryComponent]
+      declarations: [GalleryComponent, PhotoRouteTargetComponent],
+      imports: [RouterTestingModule.withRoutes([
+        { path: 'photos/:id', component: PhotoRouteTargetComponent }
+      ])]
     }).compileComponents();
+
+    router = TestBed.inject(Router);
   });
 
   it('shows a loading indicator while the first photos are loading', () => {
@@ -48,5 +64,21 @@ describe('GalleryComponent', () => {
     fixture.detectChanges();
 
     expect(fixture.nativeElement.querySelectorAll('img').length).toBeGreaterThan(initialCount);
+  }));
+
+  it('navigates to the photo detail route when a photo is clicked', fakeAsync(() => {
+    const fixture = TestBed.createComponent(GalleryComponent);
+    fixture.detectChanges();
+    tick(250);
+    fixture.detectChanges();
+
+    const photoLink = fixture.nativeElement.querySelector('a[href="/photos/1"]') as HTMLAnchorElement | null;
+    expect(photoLink).not.toBeNull();
+
+    if (photoLink) {
+      photoLink.click();
+      tick();
+      expect(router.url).toBe('/photos/1');
+    }
   }));
 });

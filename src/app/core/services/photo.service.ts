@@ -15,6 +15,14 @@ export class PhotoService {
     );
   }
 
+  getById(id: number): Observable<Photo> {
+    const photo = this.createPhoto(id);
+
+    return of(photo).pipe(
+      delay(this.delay),
+    );
+  }
+
   private createPhotoBatch(page: number, pageSize: number): Photo[] {
     const firstId = page * pageSize + 1;
 
