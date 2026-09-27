@@ -1,27 +1,49 @@
-# GalleryTemplate
+# Photo Library
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.8.
+A photo gallery built with Angular. Browse a stream of images, open an individual photo, and save favorites for later.
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Infinite-scroll gallery that loads photos in batches.
+- Photo detail pages.
+- Favorites saved in browser storage, so they remain available after a refresh in the same browser.
+- Images provided by [Picsum Photos](https://picsum.photos/).
 
-## Code scaffolding
+## Requirements
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Node.js and npm
+- An internet connection to load photos from Picsum
 
-## Build
+## Get started
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Install dependencies and start the development server:
 
-## Running unit tests
+```bash
+npm install
+npm start
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Open [http://localhost:4200](http://localhost:4200). The app reloads when you change source files.
 
-## Running end-to-end tests
+## App routes
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+| Route | Page |
+| --- | --- |
+| `/home` | Photo gallery |
+| `/photos/:id` | Photo details |
+| `/favorites` | Saved favorites |
 
-## Further help
+The root path redirects to `/home`.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Scripts
+
+| Command | Description |
+| --- | --- |
+| `npm start` | Start the local development server |
+| `npm run build` | Create a production build in `dist/` |
+| `npm test` | Run unit tests with Karma |
+| `npm run watch` | Rebuild when files change, using the development configuration |
+
+## Tech stack
+
+Angular, TypeScript, RxJS, and SCSS.
