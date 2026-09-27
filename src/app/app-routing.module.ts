@@ -1,21 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { GalleryComponent } from './features/gallery/gallery.component';
-import { FavoritesComponent } from './features/favorites/favorites.component';
-import { PhotoDetailComponent } from './features/photo-detail/photo-detail.component';
 
 const routes: Routes = [
   {
     path: 'home',
-    component: GalleryComponent,
+    loadChildren: () => import('./features/gallery/gallery.module').then((module) => module.GalleryModule),
   },
   {
     path: 'favorites',
-    component: FavoritesComponent,
+    loadChildren: () => import('./features/favorites/favorites.module').then((module) => module.FavoritesModule),
   },
   {
     path: 'photos/:id',
-    component: PhotoDetailComponent,
+    loadChildren: () => import('./features/photo-detail/photo-detail.module').then((module) => module.PhotoDetailModule),
   },
   {
     path: '',
@@ -27,7 +24,6 @@ const routes: Routes = [
     redirectTo: 'home',
   },
 ];
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
