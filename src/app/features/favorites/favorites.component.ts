@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { FavoritesService } from '../../core/services/favorites.service';
 
 @Component({
   selector: 'app-favorites',
@@ -7,4 +8,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./favorites.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FavoritesComponent {}
+export class FavoritesComponent {
+  readonly photos = inject(FavoritesService).favorites;
+}

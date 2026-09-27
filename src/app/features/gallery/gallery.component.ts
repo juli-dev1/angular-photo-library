@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, HostListener, OnInit, inject, signal, DestroyRef } from '@angular/core';
 import { Photo } from '../../core/models/photo.model';
+import { FavoritesService } from '../../core/services/favorites.service';
 import { PhotoService } from '../../core/services/photo.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { finalize } from 'rxjs';
@@ -13,13 +14,39 @@ import { finalize } from 'rxjs';
 })
 export class GalleryComponent implements OnInit {
   private readonly photoService = inject(PhotoService);
+  private readonly favoritesService = inject(FavoritesService);
   private readonly destroyRef = inject(DestroyRef);
+  private toastTimeout: ReturnType<typeof setTimeout> | undefined;
 
   private readonly pageSize = 12;
   private page = 0;
 
   isLoading = signal(false);
   readonly photos = signal<Photo[]>([]);
+  readonly favoriteMessage = signal('');
+
+  constructor() {
+    this.destroyRef.onDestroy(() => {
+      if (this.toastTimeout !== undefined) {
+        clearTimeout(this.toastTimeout);
+      }
+    });
+  }
+
+  isFavorite(photoId: number): boolean {
+    return this.favoritesService.isFavorite(photoId);
+  }
+
+  addToFavorites(photo: Photo): void {
+    const added = this.favoritesService.addFavorite(photo);
+    this.favoriteMessage.set(added ? 'Added to favorites' : 'Already in favorites');
+
+    if (this.toastTimeout !== undefined) {
+      clearTimeout(this.toastTimeout);
+    }
+
+    this.toastTimeout = setTimeout(() => this.favoriteMessage.set(''), 2500);
+  }
 
   ngOnInit(): void {
     this.loadNextPage();

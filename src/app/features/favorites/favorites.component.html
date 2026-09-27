@@ -1,3 +1,15 @@
 <section class="page-placeholder" aria-labelledby="favorites-title">
   <h1 id="favorites-title">Favorites</h1>
+
+  @if (photos().length > 0) {
+    <div class="photo-grid">
+      @for (photo of photos(); track photo.id) {
+        <a class="photo-card" [routerLink]="['/photos', photo.id]" [attr.aria-label]="'View ' + photo.alt">
+          <img [src]="photo.url" [alt]="photo.alt" loading="lazy">
+        </a>
+      }
+    </div>
+  } @else {
+    <p class="empty-state">Photos you favorite will appear here.</p>
+  }
 </section>
