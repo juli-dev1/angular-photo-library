@@ -49,4 +49,22 @@ describe('GalleryComponent', () => {
 
     expect(fixture.nativeElement.querySelectorAll('img').length).toBeGreaterThan(initialCount);
   }));
+
+  it('adds the clicked photo to favorites and confirms success', fakeAsync(() => {
+    const fixture = TestBed.createComponent(GalleryComponent);
+    fixture.detectChanges();
+    tick(250);
+    fixture.detectChanges();
+
+    const photoCard = fixture.nativeElement.querySelector('.photo-card') as HTMLElement | null;
+    expect(photoCard).not.toBeNull();
+
+    if (photoCard) {
+      photoCard.click();
+      fixture.detectChanges();
+
+      expect(photoCard.getAttribute('aria-pressed')).toBe('true');
+      expect(fixture.nativeElement.querySelector('[role="status"]')?.textContent).toContain('Added to favorites');
+    }
+  }));
 });
