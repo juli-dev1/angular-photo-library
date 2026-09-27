@@ -1,13 +1,16 @@
 import { TestBed } from '@angular/core/testing';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { AppHeaderComponent } from './shared/layout/header/header.component';
 import { AppFooterComponent } from './shared/layout/footer/footer.component';
+import { CollectionNavComponent } from './shared/layout/collection-nav/collection-nav.component';
 
 describe('AppComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({
-    imports: [RouterTestingModule],
-    declarations: [AppComponent, AppHeaderComponent, AppFooterComponent]
+    imports: [RouterTestingModule, MatButtonModule, MatIconModule],
+    declarations: [AppComponent, AppHeaderComponent, AppFooterComponent, CollectionNavComponent]
   }));
 
   it('should create the app', () => {
