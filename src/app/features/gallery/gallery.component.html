@@ -4,9 +4,9 @@
   @if (photos().length > 0) {
     <div class="photo-grid">
       @for (photo of photos(); track photo.id) {
-        <a class="photo-card" [routerLink]="['/photos', photo.id]" [attr.aria-label]="'View ' + photo.alt">
+        <article class="photo-card">
           <img [src]="photo.url" [alt]="photo.alt" loading="lazy">
-        </a>
+        </article>
       }
     </div>
   }
