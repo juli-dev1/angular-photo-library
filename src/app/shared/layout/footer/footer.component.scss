@@ -1,0 +1,14 @@
+:host {
+  display: block;
+}
+
+.site-footer {
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 clamp(20px, 5vw, 72px);
+  border-top: 1px solid #e5e7e2;
+  color: #687168;
+  font-size: 12px;
+}

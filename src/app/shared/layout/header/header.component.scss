@@ -1,0 +1,19 @@
+:host {
+  display: block;
+}
+
+.site-header {
+  min-height: 68px;
+  display: flex;
+  align-items: center;
+  padding: 0 clamp(20px, 5vw, 72px);
+  border-bottom: 1px solid #e5e7e2;
+  background: #fff;
+}
+
+.logo {
+  color: #252f28;
+  font-size: 20px;
+  font-weight: 700;
+  text-decoration: none;
+}
