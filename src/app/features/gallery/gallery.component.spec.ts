@@ -1,12 +1,24 @@
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { MatIconModule } from '@angular/material/icon';
+import { FavoritesService } from '../../core/services/favorites.service';
 import { GalleryComponent } from './gallery.component';
 
 describe('GalleryComponent', () => {
+  const favoritesStorageKey = 'gallery-template:favorites';
+  let favoritesService: FavoritesService;
+
   beforeEach(async () => {
+    localStorage.removeItem(favoritesStorageKey);
+
     await TestBed.configureTestingModule({
-      declarations: [GalleryComponent]
+      declarations: [GalleryComponent],
+      imports: [MatIconModule]
     }).compileComponents();
+
+    favoritesService = TestBed.inject(FavoritesService);
   });
+
+  afterEach(() => localStorage.removeItem(favoritesStorageKey));
 
   it('shows a loading indicator while the first photos are loading', () => {
     const fixture = TestBed.createComponent(GalleryComponent);
@@ -64,6 +76,7 @@ describe('GalleryComponent', () => {
       fixture.detectChanges();
 
       expect(photoCard.getAttribute('aria-pressed')).toBe('true');
+      expect(favoritesService.isFavorite(1)).toBeTrue();
       expect(fixture.nativeElement.querySelector('[role="status"]')?.textContent).toContain('Added to favorites');
     }
   }));
