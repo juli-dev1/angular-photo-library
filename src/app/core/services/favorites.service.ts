@@ -24,6 +24,19 @@ export class FavoritesService {
     return true;
   }
 
+  removeFavorite(photoId: number): boolean {
+    const favorites = this.favoritesState();
+    const updatedFavorites = favorites.filter((photo) => photo.id !== photoId);
+
+    if (updatedFavorites.length === favorites.length) {
+      return false;
+    }
+
+    this.favoritesState.set(updatedFavorites);
+    this.saveFavorites(updatedFavorites);
+    return true;
+  }
+
   private readFavorites(): Photo[] {
     try {
       const storedFavorites = localStorage.getItem(STORAGE_KEY);
